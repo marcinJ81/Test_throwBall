@@ -59,33 +59,30 @@ public class Balistic_Calculation
         this.distancePartNumber++;
         return result;
     }
-    /// <summary>
-    /// test with time
-    /// </summary>
-    /// <param name="partOfDistance"></param>
-    /// <param name="time"></param>
-    /// <returns></returns>
-    //public Vector3 CalculateArcOneVector(int partOfDistance, float time)
-    //{
-    //    Vector3 result;
+    public Vector3 CalculateArcOneVector(float time )
+    {
+        Vector3 result;
+       
+        Debug.Log("distancePartNumber= " + distancePartNumber.ToString());
+        float partOfRoad = (float)distancePartNumber / resolution;
 
-    //    radianAngle = ConvertAngleToRadian(angle);
-    //    //Debug.Log("Radian Angle= " + radianAngle.ToString());
+        //convert angle to radina angle
+        radianAngle = ConvertAngleToRadian(angle);
 
-    //    maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
-    //    //Debug.Log("Distance= " + maxDistance.ToString());
+        //calculate the maximum distance
+        maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
+        Debug.Log("Distance= " + maxDistance.ToString());
 
-    //    timeOfFly = CalculateTimeOfFly(velocity, radianAngle, maxDistance) * (partOfDistance / resolution);
-    //    Debug.Log("Time of fly= " + timeOfFly.ToString());
+        //calculate y in one part of road
+        result = CalculateArcPoint(time, maxDistance, partOfRoad);
+        distancePartNumber++;
+        if (CalculateArcPoint(time, maxDistance, partOfRoad).z >= maxDistance)
+        {
+            return new Vector3(0, 0, maxDistance);
+        }
+        return result;
+    }
 
-    //    //get length part of distance
-    //    lengthpartOfTheDistance = maxDistance / resolution;
-    //    Debug.Log("Length one part of distance= " + (maxDistance / resolution).ToString());
-
-    //    result = CalculateArcPoint(time, lengthpartOfTheDistance);
-    //    this.distancePartNumber++;
-    //    return result;
-    //}
     public float ConvertAngleToRadian(float angle)
     {
         return Mathf.Deg2Rad * angle;
