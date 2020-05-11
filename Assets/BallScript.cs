@@ -22,7 +22,7 @@ public class BallScript : MonoBehaviour
     {
         ballGameObject = GameObject.Find("Sphere");
         ballStartPosition = ballGameObject.transform.position;
-        ballFly = new Balistic_Calculation(10, 10f, 45f);
+        ballFly = new Balistic_Calculation(10, 20f, 45f);
        // framesToSkip = UnityEngine.Random.Range(0, 10);
     }
     void Start()
@@ -34,15 +34,9 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-      
-            rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
-
-           // Debug.Log("Position z=" + this.transform.position.z);
-           // framesToSkip = 10;
-
-     
-   }
-
-    
-   
+        float distanceMax;
+        //TimeSpan time2 = DateTime.Now.TimeOfDay;
+        rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime,out distanceMax));
+       
+    }  
 }

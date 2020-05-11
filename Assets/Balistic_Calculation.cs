@@ -59,7 +59,7 @@ public class Balistic_Calculation
         this.distancePartNumber++;
         return result;
     }
-    public Vector3 CalculateArcOneVector(float time )
+    public Vector3 CalculateArcOneVector(float time, out float maxDistance )
     {
         Vector3 result;
        
@@ -84,11 +84,10 @@ public class Balistic_Calculation
         Debug.Log("timeFly= " + timeFly.ToString());
         Debug.Log("time= " + time.ToString());
 
-        if (CalculateArcPoint(time, maxDistance, partOfRoad).y <= 0)
+        if (CalculateArcPoint(time, maxDistance, partOfRoad).z >= maxDistance)
         {
             Debug.Log("---End---");
-            return new Vector3(0, 0, maxDistance);
-            
+            return new Vector3(0, 0, 0);       
         }
         else
         {
