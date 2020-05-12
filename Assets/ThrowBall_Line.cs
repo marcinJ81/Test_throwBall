@@ -7,7 +7,7 @@ public class ThrowBall_Line : MonoBehaviour
 {
     private LineRenderer lr;
 
-    public float velocity = 22;
+    public float velocity = 20;
     public float angle = 45;
     public int resolution = 10;
     private float g;

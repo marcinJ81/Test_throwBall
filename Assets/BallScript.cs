@@ -1,8 +1,4 @@
-﻿using Assets;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
@@ -16,13 +12,13 @@ public class BallScript : MonoBehaviour
     private ThrowBall throwMethod = new ThrowBall();
     private Balistic_Calculation ballFly;
 
-    int framesToSkip;
+    bool flying = false;
     // Start is called before the first frame update
     private void Awake()
     {
         ballGameObject = GameObject.Find("Sphere");
         ballStartPosition = ballGameObject.transform.position;
-        ballFly = new Balistic_Calculation(10, 20f, 45f);
+        ballFly = new Balistic_Calculation(10, 22f, 45f);
        // framesToSkip = UnityEngine.Random.Range(0, 10);
     }
     void Start()
@@ -36,10 +32,13 @@ public class BallScript : MonoBehaviour
     {
         float distanceMax;
         
+       
         if (Input.GetKey(KeyCode.Space))
         {
             rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime, out distanceMax));
         }
+
+
        
     }  
 }
