@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
-  //  public GameObject ballObject;
+    //  public GameObject ballObject;
     // Start is called before the first frame update
-    private Vector3 ballStartPosition;
+    public GameObject targetCircle;
     public GameObject ballGameObject;
-    private float Animation;
 
+    private float Animation;
+    private Vector3 ballStartPosition;
     private Rigidbody rb;
     private ThrowBall throwMethod = new ThrowBall();
     private Balistic_Calculation ballFly;
-
+    private Vector3 targetPosition;
     bool flying = false;
     // Start is called before the first frame update
     private void Awake()
@@ -26,20 +27,16 @@ public class BallScript : MonoBehaviour
     {
        
         rb = ballGameObject.GetComponent<Rigidbody>();
+        targetPosition = targetCircle.transform.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float distanceMax;
-        
-       
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime, out distanceMax));
+            rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
         }
-
-
-       
+        
     }  
 }

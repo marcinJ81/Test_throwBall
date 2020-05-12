@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace Assets
 {
-    public interface ICalculateDistanceAnTime
+    public interface ICalculateDistanceAndTime
     {
         float MaxDistance(float velocity, float radianAngle, float g);
         float CalculateTimeOfFly(float velocity, float radianangle, float maxdistance);
     }
 
-    public class DistanceAndTime : ICalculateDistanceAnTime
+    public class DistanceAndTime : ICalculateDistanceAndTime
     {
         public float CalculateTimeOfFly(float velocity, float radianangle, float maxdistance)
         {

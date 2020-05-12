@@ -14,13 +14,13 @@ public class Balistic_Calculation
     private int resolution;
     private float maxDistance;
 
-    private ICalculateDistanceAnTime maxdistanceFlyTime;
+    private ICalculateDistanceAndTime maxdistanceFlyTime;
     public Balistic_Calculation()
     {
         g = Mathf.Abs(Physics2D.gravity.y);
         this.distancePartNumber = 1;
     }
-    public Balistic_Calculation(ICalculateDistanceAnTime distanceAndtime, int resolution, float velocity, float angle)
+    public Balistic_Calculation(ICalculateDistanceAndTime distanceAndtime, int resolution, float velocity, float angle)
         :this()
     {
         if ((resolution == 0) || (resolution < 0))
@@ -36,7 +36,7 @@ public class Balistic_Calculation
         this.maxdistanceFlyTime = distanceAndtime;
     }
 
-    public Vector3 CalculateArcOneVector(float time, out float maxDistance )
+    public Vector3 CalculateArcOneVector(float time)
     {
         Vector3 result;
        
@@ -47,7 +47,7 @@ public class Balistic_Calculation
         Debug.Log("part of road= " + ((float)distancePartNumber / resolution).ToString());
 
         //convert angle to radian angle
-        radianAngle = SConvertAngleToRadian.AngleToRadian(angle);
+        radianAngle = SAngleToRadian.AngleToRadian(angle);
 
         //calculate the maximum distance
         maxDistance = maxdistanceFlyTime.MaxDistance(velocity, radianAngle, g);
@@ -65,13 +65,12 @@ public class Balistic_Calculation
         {
             Debug.Log("---End---");
             return new Vector3(0, 1, 0);       
-        }
-       
+        }      
             Debug.Log("---Fly---");
             return result;
-       
     }
    
+
     private Vector3 CalculateArcPoint(float t, float x, float amountDistance)
     {
         //s = V*t
