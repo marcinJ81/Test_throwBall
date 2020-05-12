@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets;
 
 public class Balistic_Calculation
 {
     public float velocity { get; set; }
     public float angle;
-
     public float radianAngle { get; set; }
     public float timeOfFly { get; set; }
     private float lengthpartOfTheDistance;
@@ -14,12 +14,13 @@ public class Balistic_Calculation
     private int resolution;
     private float maxDistance;
 
+    private ICalculateDistanceAnTime maxdistanceFlyTime;
     public Balistic_Calculation()
     {
         g = Mathf.Abs(Physics2D.gravity.y);
         this.distancePartNumber = 1;
     }
-    public Balistic_Calculation(int resolution, float velocity, float angle)
+    public Balistic_Calculation(ICalculateDistanceAnTime distanceAndtime, int resolution, float velocity, float angle)
         :this()
     {
         if ((resolution == 0) || (resolution < 0))
@@ -32,8 +33,9 @@ public class Balistic_Calculation
         }
         this.angle = angle;
         this.velocity = velocity;
+        this.maxdistanceFlyTime = distanceAndtime;
     }
-   
+
     public Vector3 CalculateArcOneVector(float time, out float maxDistance )
     {
         Vector3 result;
@@ -45,17 +47,17 @@ public class Balistic_Calculation
         Debug.Log("part of road= " + ((float)distancePartNumber / resolution).ToString());
 
         //convert angle to radian angle
-        radianAngle = ConvertAngleToRadian(angle);
+        radianAngle = SConvertAngleToRadian.AngleToRadian(angle);
 
         //calculate the maximum distance
-        maxDistance = MaxDistance(velocity,radianAngle,g);
+        maxDistance = maxdistanceFlyTime.MaxDistance(velocity, radianAngle, g);
         //Debug.Log("Distance= " + maxDistance.ToString());
 
         //calculate y in one part of road
         result = CalculateArcPoint(time, maxDistance, partOfRoad);
         distancePartNumber++;
 
-        float timeFly = CalculateTimeOfFly(velocity, radianAngle, maxDistance);
+        float timeFly = maxdistanceFlyTime.CalculateTimeOfFly(velocity, radianAngle, maxDistance);
         Debug.Log("timeFly= " + timeFly.ToString());
         Debug.Log("time= " + time.ToString());
 
@@ -68,16 +70,6 @@ public class Balistic_Calculation
             Debug.Log("---Fly---");
             return result;
        
-    }
-    public float MaxDistance(float velocity, float radianAngle, float g)
-    {
-        float result = 0f;
-        result = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
-        return result;
-    }
-    public float ConvertAngleToRadian(float angle)
-    {
-        return Mathf.Deg2Rad * angle;
     }
    
     private Vector3 CalculateArcPoint(float t, float x, float amountDistance)
@@ -92,13 +84,5 @@ public class Balistic_Calculation
         return new Vector3(0, y, s);
     }
 
-    public float CalculateTimeOfFly(float velocity, float radianangle, float maxdistance)
-    {
-        float timefly;
-      //  Debug.Log("maxdistance in time method= " + maxdistance.ToString());
-        timefly = maxdistance / velocity * Mathf.Cos(radianangle);
-        //Debug.Log("velocity * Mathf.Cos(radianAngle) = " + (velocity * Mathf.Cos(radianangle)).ToString());
-       // Debug.Log("timefly in method = " + timefly.ToString());
-        return timefly;
-    }
+    
 }

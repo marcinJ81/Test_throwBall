@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets;
+using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class BallScript : MonoBehaviour
     {
         ballGameObject = GameObject.Find("Sphere");
         ballStartPosition = ballGameObject.transform.position;
-        ballFly = new Balistic_Calculation(10, 22f, 45f);
+        ballFly = new Balistic_Calculation(new DistanceAndTime(), 10, 22f, 45f);
        // framesToSkip = UnityEngine.Random.Range(0, 10);
     }
     void Start()
