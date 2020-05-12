@@ -33,32 +33,7 @@ public class Balistic_Calculation
         this.angle = angle;
         this.velocity = velocity;
     }
-    public Vector3 CalculateArcOneVector()
-    {
-        Vector3 result;
-        if (distancePartNumber == this.resolution)
-        {
-            return new Vector3(0,0, maxDistance);
-        }
-         Debug.Log("distancePartNumber= " + distancePartNumber.ToString());
-        float partOfRoad = (float) distancePartNumber / resolution ;
-
-        //convert angle to radina angle
-        radianAngle = ConvertAngleToRadian(angle);
-
-        //calculate the maximum distance
-        maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
-        Debug.Log("Distance= " + maxDistance.ToString());
-
-        //calculate time of fly in one part of road
-        timeOfFly = CalculateTimeOfFly(velocity, radianAngle, maxDistance);
-        Debug.Log("Time of fly= " + timeOfFly.ToString());
-
-        //calculate y in one part of road
-        result = CalculateArcPoint(timeOfFly, maxDistance, partOfRoad);
-        this.distancePartNumber++;
-        return result;
-    }
+   
     public Vector3 CalculateArcOneVector(float time, out float maxDistance )
     {
         Vector3 result;
@@ -87,13 +62,12 @@ public class Balistic_Calculation
         if (CalculateArcPoint(time, maxDistance, partOfRoad).z >= maxDistance)
         {
             Debug.Log("---End---");
-            return new Vector3(0, 0, 0);       
+            return new Vector3(0, 1, 0);       
         }
-        else
-        {
+       
             Debug.Log("---Fly---");
             return result;
-        }
+       
     }
     public float MaxDistance(float velocity, float radianAngle, float g)
     {
@@ -113,7 +87,7 @@ public class Balistic_Calculation
         
         float y = s * Mathf.Tan(radianAngle) - ((g * s * s) /
             (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
-         Debug.Log("droga=" + s.ToString());
+         Debug.Log("distance=" + s.ToString());
         // Debug.Log("wysokosc=" + y.ToString());
         return new Vector3(0, y, s);
     }

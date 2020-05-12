@@ -35,8 +35,11 @@ public class BallScript : MonoBehaviour
     void FixedUpdate()
     {
         float distanceMax;
-        //TimeSpan time2 = DateTime.Now.TimeOfDay;
-        rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime,out distanceMax));
+        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime, out distanceMax));
+        }
        
     }  
 }
