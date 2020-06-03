@@ -10,7 +10,7 @@ public class ThrowBall_Line : MonoBehaviour
     public GameObject TargetCircle;
     public float velocity = 20;
     public float angle = 45;
-    public int resolution = 10;
+    public int resolution = 50;
     private float g;
     private float radianAngle;
     private Target_script targetScript;
@@ -29,7 +29,7 @@ public class ThrowBall_Line : MonoBehaviour
     void Update()
     {
         //  OnValidate(targetScript.velocity, targetScript.angle);
-        OnValidate(20, targetScript.angle);
+        OnValidate(targetScript.velocity, targetScript.angle);
     }
 
     private void OnValidate()

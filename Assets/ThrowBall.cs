@@ -26,7 +26,7 @@ public class ThrowBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        OnValidate();
+       // OnValidate();
     }
 
     private void OnValidate()

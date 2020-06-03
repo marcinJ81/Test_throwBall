@@ -21,7 +21,7 @@ public class Target_script : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(0,4 * Time.deltaTime,0);
-            if(angle <=  89)
+            if (angle <= 89)
                 this.angle += 1;
             Debug.Log("angle in script = " + angle.ToString());
         }
@@ -29,9 +29,22 @@ public class Target_script : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(0,-4 * Time.deltaTime,0);
-            if(angle >= 1)
+            if (angle >= 1)
                 this.angle -= 1;
             Debug.Log("angle in script = " + angle.ToString());
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (velocity >= 1)
+                this.velocity -= 1;
+            Debug.Log("velocity in script = " + velocity.ToString());
+        }
+         //increase velocity
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (velocity <= 100)
+                this.velocity += 1;
+            Debug.Log("velocity in script = " + velocity.ToString());
         }
     }
 
