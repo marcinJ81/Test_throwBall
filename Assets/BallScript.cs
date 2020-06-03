@@ -21,7 +21,7 @@ public class BallScript : MonoBehaviour
         ballGameObject = GameObject.Find("Sphere");
         ballStartPosition = ballGameObject.transform.position;
         ballFly = new Balistic_Calculation(new DistanceAndTime(), 10, 22f, 45f);
-       // framesToSkip = UnityEngine.Random.Range(0, 10);
+      
     }
     void Start()
     {
@@ -37,7 +37,7 @@ public class BallScript : MonoBehaviour
             rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
         }
         Vector3 distance = targetPosition - transform.position;
-        Debug.Log("distance ball -> target = " + distance.z.ToString());
+        //Debug.Log("distance ball -> target = " + distance.z.ToString());
     }  
 
 }

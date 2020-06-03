@@ -7,12 +7,13 @@ public class ThrowBall_Line : MonoBehaviour
 {
     private LineRenderer lr;
 
+    public GameObject TargetCircle;
     public float velocity = 20;
     public float angle = 45;
     public int resolution = 10;
     private float g;
     private float radianAngle;
-   
+    private Target_script targetScript;
     private void Awake()
     {
         lr = GetComponent<LineRenderer>();
@@ -22,7 +23,13 @@ public class ThrowBall_Line : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        OnValidate();
+        //OnValidate();
+        targetScript = FindObjectOfType(typeof(Target_script)) as Target_script;
+    }
+    void Update()
+    {
+        //  OnValidate(targetScript.velocity, targetScript.angle);
+        OnValidate(20, targetScript.angle);
     }
 
     private void OnValidate()
@@ -30,12 +37,37 @@ public class ThrowBall_Line : MonoBehaviour
         if (lr != null && Application.isPlaying)
             RenderArc();
     }
+
+    private void OnValidate(float velocity, float angle)
+    {
+        if (lr != null && Application.isPlaying)
+            RenderArc(velocity,angle);
+    }
+
+    private void RenderArc(float velocity, float angle)
+    {
+        lr.positionCount = resolution + 1;
+        lr.SetPositions(CalculateArcArray(velocity,angle));
+    }
     private void RenderArc()
     {
         lr.positionCount = resolution + 1;
         lr.SetPositions(CalculateArcArray());
     }
     private Vector3[] CalculateArcArray()
+    {
+        Vector3[] arcArray = new Vector3[resolution + 1];
+
+        radianAngle = Mathf.Deg2Rad * angle;
+        float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
+        for (int i = 0; i <= resolution; i++)
+        {
+            float t = (float)i / (float)resolution;
+            arcArray[i] = CalculateArcPoint(t, maxDistance);
+        }
+        return arcArray;
+    }
+    public Vector3[] CalculateArcArray(float velocity, float angle)
     {
         Vector3[] arcArray = new Vector3[resolution + 1];
 

@@ -35,7 +35,7 @@ public class Balistic_Calculation
         this.velocity = velocity;
         this.maxdistanceFlyTime = distanceAndtime;
     }
-
+    
     public Vector3 CalculateArcOneVector(float time)
     {
         Vector3 result;
