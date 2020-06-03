@@ -79,7 +79,6 @@ public class Balistic_Calculation
         float y = s * Mathf.Tan(radianAngle) - ((g * s * s) /
             (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
          Debug.Log("distance=" + s.ToString());
-        // Debug.Log("wysokosc=" + y.ToString());
         return new Vector3(0, y, s);
     }
 

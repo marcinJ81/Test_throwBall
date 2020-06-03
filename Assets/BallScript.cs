@@ -25,7 +25,6 @@ public class BallScript : MonoBehaviour
     }
     void Start()
     {
-       
         rb = ballGameObject.GetComponent<Rigidbody>();
         targetPosition = targetCircle.transform.position;
     }
@@ -37,6 +36,8 @@ public class BallScript : MonoBehaviour
         {
             rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
         }
-        
+        Vector3 distance = targetPosition - transform.position;
+        Debug.Log("distance ball -> target = " + distance.z.ToString());
     }  
+
 }

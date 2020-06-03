@@ -13,11 +13,11 @@ public class Target_script : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(0,4 * Time.deltaTime,0);
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(0,-4 * Time.deltaTime,0);
         }
