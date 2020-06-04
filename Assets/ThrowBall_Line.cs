@@ -10,7 +10,7 @@ public class ThrowBall_Line : MonoBehaviour
     public GameObject TargetCircle;
     public float velocity = 20;
     public float angle = 45;
-    public int resolution = 50;
+    public int resolution = 0;
     private float g;
     private float radianAngle;
     private Target_script targetScript;
@@ -28,7 +28,6 @@ public class ThrowBall_Line : MonoBehaviour
     }
     void Update()
     {
-        //  OnValidate(targetScript.velocity, targetScript.angle);
         OnValidate(targetScript.velocity, targetScript.angle);
     }
 
@@ -69,10 +68,17 @@ public class ThrowBall_Line : MonoBehaviour
     }
     public Vector3[] CalculateArcArray(float velocity, float angle)
     {
-        Vector3[] arcArray = new Vector3[resolution + 1];
-
         radianAngle = Mathf.Deg2Rad * angle;
         float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
+        //how increase or decrease resolution?
+        //resolution = ?
+        //simple and bad
+        if (maxDistance > 40.0f)
+        {
+            resolution += 10;
+        }
+
+        Vector3[] arcArray = new Vector3[resolution + 1];
         for (int i = 0; i <= resolution; i++)
         {
             float t = (float)i / (float)resolution;
