@@ -37,8 +37,8 @@ public class ThrowBall : MonoBehaviour
     private void RenderArc()
     {
 
-        // lr.positionCount = resolution + 1;
-        // lr.SetPositions(CalculateArcArray());
+         //lr.positionCount = resolution + 1;
+         //lr.SetPositions(CalculateArcArray());
     }
 
     private void MakeArcMesh(Vector3[] arcVerts)

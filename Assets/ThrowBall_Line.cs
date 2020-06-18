@@ -23,7 +23,7 @@ public class ThrowBall_Line : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //OnValidate();
+        
         targetScript = FindObjectOfType(typeof(Target_script)) as Target_script;
     }
     void Update()
@@ -70,13 +70,7 @@ public class ThrowBall_Line : MonoBehaviour
     {
         radianAngle = Mathf.Deg2Rad * angle;
         float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
-        //how increase or decrease resolution?
-        //resolution = ?
-        //simple and bad
-        if (maxDistance > 40.0f)
-        {
-            resolution += 10;
-        }
+
 
         Vector3[] arcArray = new Vector3[resolution + 1];
         for (int i = 0; i <= resolution; i++)
