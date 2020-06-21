@@ -9,13 +9,13 @@ namespace Assets
 {
    public interface IChangeVelocityAndAngle
     {
-        float WhenKeyPressChangeValueAngle(KeyCode key, ref float angle);
-        float WhenKeyPressChangeValueVelocity(KeyCode key, ref float velocity);
+        void WhenKeyPressChangeValueAngle(KeyCode key, ref float angle);
+        void WhenKeyPressChangeValueVelocity(KeyCode key, ref float velocity);
     }
 
     public class ChangeValueVelocityAndAngle : IChangeVelocityAndAngle
     {
-        public float WhenKeyPressChangeValueAngle(KeyCode key, ref float angle)
+        public void WhenKeyPressChangeValueAngle(KeyCode key, ref float angle)
         {
            
             if (Input.GetKey(KeyCode.RightArrow))
@@ -24,7 +24,6 @@ namespace Assets
                 if (angle <= 89)
                 {
                    angle += 1;
-                    return angle;
                 }
             }
             //decrease angle
@@ -34,14 +33,11 @@ namespace Assets
                 if (angle >= 1)
                 {
                    angle -= 1;
-                   return angle;
                 }
             }
-
-            return 0;
         }
 
-        public float WhenKeyPressChangeValueVelocity(KeyCode key, ref float velocity)
+        public void WhenKeyPressChangeValueVelocity(KeyCode key, ref float velocity)
         {
             
             //decrease velocity
@@ -50,7 +46,6 @@ namespace Assets
                 if (velocity >= 1)
                 {
                     velocity -= 1;
-                    return velocity;
                 }
             }
             //increase velocity
@@ -59,10 +54,8 @@ namespace Assets
                 if (velocity <= 100)
                 {
                     velocity += 1;
-                    return velocity;
                 }
             }
-            return 0;
         }
     }
 }
