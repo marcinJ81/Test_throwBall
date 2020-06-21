@@ -48,5 +48,55 @@ public class Target_script : MonoBehaviour
         }
     }
 
+    private float WhenKeyPressChangeValueAngle(KeyCode key)
+    {
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(0, 4 * Time.deltaTime, 0);
+            if (angle <= 89)
+            {
+                this.angle += 1;
+                return angle;
+            }
+        }
+        //decrease angle
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(0, -4 * Time.deltaTime, 0);
+            if (angle >= 1)
+            {
+                this.angle -= 1;
+                return angle;
+            }
+        }
+        
+        return 0;
+           
+    }
+
+    private float WhenKeyPressChangeValueVelocity(KeyCode key)
+    {
+        //decrease velocity
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (velocity >= 1)
+            {
+                this.velocity -= 1;
+                return velocity;
+            }
+        }
+        //increase velocity
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (velocity <= 100)
+            {
+                this.velocity += 1;
+                return velocity;
+            }
+        }
+        return 0;
+
+    }
+
 
 }
