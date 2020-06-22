@@ -4,11 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Reflection;
 
 namespace Assets
 {
+    public enum PropertiesToChange
+    {
+        angle,
+        velocity,
+        empty
+    }
     public class StrategyForChangeAngleAndVelocity
     {
+        //private PropertyInfo[] propertyInfos;
+        //public StrategyForChangeAngleAndVelocity(Target_script target_Script)
+        //{
+        //    propertyInfos = typeof(Target_script).GetProperties(BindingFlags.Public);
+
+        //}
+
+        private IChangeVelocityAndAngle ichangeVelocityAngle;
+        public StrategyForChangeAngleAndVelocity()
+        {
+            this.ichangeVelocityAngle = new ChangeValueVelocityAndAngle();
+        }
+        public  float StrategyTochange(KeyCode key, float valueToChange)
+        {
+            if (key == KeyCode.RightArrow || key == KeyCode.LeftArrow)
+            {
+                return ichangeVelocityAngle.WhenKeyPressChangeValueAngle(key, valueToChange);
+                
+            }
+            if (key == KeyCode.DownArrow || key == KeyCode.UpArrow)
+            {
+               
+               return  ichangeVelocityAngle.WhenKeyPressChangeValueVelocity(key, valueToChange);
+               
+            }
+            return valueToChange;
+        }
 
     }
    public interface IChangeVelocityAndAngle
@@ -20,8 +54,7 @@ namespace Assets
     public class ChangeValueVelocityAndAngle : IChangeVelocityAndAngle
     {
         public float WhenKeyPressChangeValueAngle(KeyCode key, float angle)
-        {
-           
+        {          
             if (Input.GetKey(KeyCode.RightArrow))
             {
                

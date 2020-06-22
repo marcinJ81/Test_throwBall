@@ -10,10 +10,12 @@ public class Target_script : MonoBehaviour
     public float angle { get; private set; }
     public float velocity { get; private set; }
 
-    private IChangeVelocityAndAngle changeAngleVelocity;
+    // private IChangeVelocityAndAngle changeAngleVelocity;
+    private StrategyForChangeAngleAndVelocity strategy;
     private void Awake()
     {
-        changeAngleVelocity = new ChangeValueVelocityAndAngle();
+        //changeAngleVelocity = new ChangeValueVelocityAndAngle();
+        strategy = new StrategyForChangeAngleAndVelocity();
     }
     void Start()
     {
@@ -27,10 +29,15 @@ public class Target_script : MonoBehaviour
     {
 
         KeyCode key = SKeyDetecion.KeysDown().Any() ? SKeyDetecion.KeysDown().First() : KeyCode.AltGr;
+        if ((key == KeyCode.RightArrow || key == KeyCode.LeftArrow))
+        {
+            this.angle = strategy.StrategyTochange(key, this.angle);
+        }
+        if (key == KeyCode.DownArrow || key == KeyCode.UpArrow)
+        {
+            this.velocity = strategy.StrategyTochange(key, this.velocity);
+        }
 
-        this.angle  = changeAngleVelocity.WhenKeyPressChangeValueAngle(key, this.angle);
-        this.velocity = changeAngleVelocity.WhenKeyPressChangeValueVelocity(key,this.velocity);
-       
     }
 
     void changeValue()
