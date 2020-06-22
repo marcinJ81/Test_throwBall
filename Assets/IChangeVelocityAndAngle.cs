@@ -7,15 +7,19 @@ using UnityEngine;
 
 namespace Assets
 {
+    public class StrategyForChangeAngleAndVelocity
+    {
+
+    }
    public interface IChangeVelocityAndAngle
     {
-        void WhenKeyPressChangeValueAngle(KeyCode key, ref float angle);
-        void WhenKeyPressChangeValueVelocity(KeyCode key, ref float velocity);
+       float  WhenKeyPressChangeValueAngle(KeyCode key, float angle);
+       float  WhenKeyPressChangeValueVelocity(KeyCode key, float velocity);
     }
 
     public class ChangeValueVelocityAndAngle : IChangeVelocityAndAngle
     {
-        public void WhenKeyPressChangeValueAngle(KeyCode key, ref float angle)
+        public float WhenKeyPressChangeValueAngle(KeyCode key, float angle)
         {
            
             if (Input.GetKey(KeyCode.RightArrow))
@@ -24,6 +28,7 @@ namespace Assets
                 if (angle <= 89)
                 {
                    angle += 1;
+                    return angle;
                 }
             }
             //decrease angle
@@ -33,11 +38,13 @@ namespace Assets
                 if (angle >= 1)
                 {
                    angle -= 1;
+                    return angle;
                 }
             }
+            return angle;
         }
 
-        public void WhenKeyPressChangeValueVelocity(KeyCode key, ref float velocity)
+        public float WhenKeyPressChangeValueVelocity(KeyCode key,  float velocity)
         {
             
             //decrease velocity
@@ -46,6 +53,7 @@ namespace Assets
                 if (velocity >= 1)
                 {
                     velocity -= 1;
+                    return velocity;
                 }
             }
             //increase velocity
@@ -54,8 +62,10 @@ namespace Assets
                 if (velocity <= 100)
                 {
                     velocity += 1;
+                    return velocity;
                 }
             }
+            return velocity;
         }
     }
 }

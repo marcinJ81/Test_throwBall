@@ -25,16 +25,12 @@ public class Target_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float localAngle = this.angle;
-        float localVelocity = this.velocity;
 
         KeyCode key = SKeyDetecion.KeysDown().Any() ? SKeyDetecion.KeysDown().First() : KeyCode.AltGr;
 
-        changeAngleVelocity.WhenKeyPressChangeValueAngle(key, ref localAngle);
-        changeAngleVelocity.WhenKeyPressChangeValueVelocity(key, ref localVelocity);
-
-        this.angle = localAngle;
-        this.velocity = velocity;
+        this.angle  = changeAngleVelocity.WhenKeyPressChangeValueAngle(key, this.angle);
+        this.velocity = changeAngleVelocity.WhenKeyPressChangeValueVelocity(key,this.velocity);
+       
     }
 
     void changeValue()
