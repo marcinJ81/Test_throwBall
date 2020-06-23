@@ -115,10 +115,34 @@ namespace Assets
     {
        float  WhenKeyPressChangeValueAngle(KeyCode key, float angle);
        float  WhenKeyPressChangeValueVelocity(KeyCode key, float velocity);
+
+        float WhenKeyPressChangeValue(KeyCode key, float valueToChange); 
     }
 
     public class ChangeValueVelocityAndAngle : IChangeVelocityAndAngle
     {
+        public float WhenKeyPressChangeValue(KeyCode key, float valueToChange)
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                   return valueToChange += 1;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                    return valueToChange -= 1;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                    return valueToChange -= 1;
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            { 
+                    return valueToChange += 1;
+
+            }
+            return valueToChange;
+        }
+
         public float WhenKeyPressChangeValueAngle(KeyCode key, float angle)
         {          
             if (Input.GetKey(KeyCode.RightArrow))
