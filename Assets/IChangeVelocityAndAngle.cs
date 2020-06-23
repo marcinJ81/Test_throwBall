@@ -10,13 +10,14 @@ namespace Assets
 {
     public enum InfoChangeAngleORVelocity
     {
-        angle,
-        velocity,
-        empty
+        angle_change,
+        velocity_change,
+        no_change
     }
     public class PropertiesToChange
     {
         private float privateAngle { get; set; }
+        private float privateVelocity { get; set; }
         public float angle
         {
             get
@@ -25,17 +26,42 @@ namespace Assets
             }
             set
             {
-                if (info == InfoChangeAngleORVelocity.angle)
+                if (AngleInfo == InfoChangeAngleORVelocity.angle_change)
                 {
-                    if ((angle <= 89) && (angle >= 1))
+                    if ((angle <= SGlobalBpropertiesValue.MAX_ANGLE) && (angle >= SGlobalBpropertiesValue.MIN_ANGLE))
                     {
                         privateAngle = angle;
                     }
                 }
             }
         }
-        public float velocity { get; set; }
-        public InfoChangeAngleORVelocity info { get; set; }
+        public float velocity
+        {
+            get
+            {
+                return privateVelocity;
+            }
+            set
+            {
+                if (VelocityInfo == InfoChangeAngleORVelocity.velocity_change)
+                {
+                    if ((velocity >= SGlobalBpropertiesValue.MIN_VELOCITY) && (velocity <= SGlobalBpropertiesValue.MAX_VELOCITY))
+                    {
+                        privateVelocity = velocity;
+                    }
+                }
+            }
+        }
+        public InfoChangeAngleORVelocity AngleInfo { get; set; }
+        public InfoChangeAngleORVelocity VelocityInfo { get; set; }
+
+        public PropertiesToChange(float paramangle, float paramvelocity, InfoChangeAngleORVelocity paramInfoVelocity, InfoChangeAngleORVelocity paramInfoAngle)
+        {
+            this.angle = paramangle;
+            this.velocity = paramvelocity;
+            this.AngleInfo = paramInfoAngle;
+            this.VelocityInfo = paramInfoVelocity;
+        }
     }
     public class StrategyForChangeAngleAndVelocity
     {
@@ -66,22 +92,22 @@ namespace Assets
             }
             return valueToChange;
         }
-        public Dictionary<float,float> StrategyTochange(KeyCode key, Dictionary<float, float> valueToChange)
+        public PropertiesToChange StrategyTochange(KeyCode key, PropertiesToChange propertiesToChange)
         {
-            
-            if (key == KeyCode.RightArrow || key == KeyCode.LeftArrow)
+            if (propertiesToChange.AngleInfo == InfoChangeAngleORVelocity.angle_change)
             {
-                return ichangeVelocityAngle.WhenKeyPressChangeValueAngle(key, valueToChange);
-
+                return new PropertiesToChange(ichangeVelocityAngle.WhenKeyPressChangeValueAngle(key, propertiesToChange.angle),
+                    propertiesToChange.velocity, InfoChangeAngleORVelocity.angle_change, InfoChangeAngleORVelocity.no_change);
             }
-            if (key == KeyCode.DownArrow || key == KeyCode.UpArrow)
+            if (propertiesToChange.VelocityInfo == InfoChangeAngleORVelocity.velocity_change)
             {
 
-                return ichangeVelocityAngle.WhenKeyPressChangeValueVelocity(key, valueToChange);
-
+                return new PropertiesToChange(propertiesToChange.angle,ichangeVelocityAngle.WhenKeyPressChangeValueAngle(key, propertiesToChange.velocity),
+                     InfoChangeAngleORVelocity.no_change, InfoChangeAngleORVelocity.velocity_change);
             }
 
-            return valueToChange;
+            return new PropertiesToChange(propertiesToChange.angle,propertiesToChange.velocity,
+                InfoChangeAngleORVelocity.no_change, InfoChangeAngleORVelocity.no_change);
         }
 
     }
