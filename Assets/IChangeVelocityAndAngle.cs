@@ -123,22 +123,13 @@ namespace Assets
     {
         public float WhenKeyPressChangeValue(KeyCode key, float valueToChange)
         {
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow))
             {
                    return valueToChange += 1;
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow))
             {
                     return valueToChange -= 1;
-            }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                    return valueToChange -= 1;
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            { 
-                    return valueToChange += 1;
-
             }
             return valueToChange;
         }
