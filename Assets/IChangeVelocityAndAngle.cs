@@ -8,11 +8,34 @@ using System.Reflection;
 
 namespace Assets
 {
-    public enum PropertiesToChange
+    public enum InfoChangeAngleORVelocity
     {
         angle,
         velocity,
         empty
+    }
+    public class PropertiesToChange
+    {
+        private float privateAngle { get; set; }
+        public float angle
+        {
+            get
+            {
+                return privateAngle;
+            }
+            set
+            {
+                if (info == InfoChangeAngleORVelocity.angle)
+                {
+                    if ((angle <= 89) && (angle >= 1))
+                    {
+                        privateAngle = angle;
+                    }
+                }
+            }
+        }
+        public float velocity { get; set; }
+        public InfoChangeAngleORVelocity info { get; set; }
     }
     public class StrategyForChangeAngleAndVelocity
     {
@@ -41,6 +64,23 @@ namespace Assets
                return  ichangeVelocityAngle.WhenKeyPressChangeValueVelocity(key, valueToChange);
                
             }
+            return valueToChange;
+        }
+        public Dictionary<float,float> StrategyTochange(KeyCode key, Dictionary<float, float> valueToChange)
+        {
+            
+            if (key == KeyCode.RightArrow || key == KeyCode.LeftArrow)
+            {
+                return ichangeVelocityAngle.WhenKeyPressChangeValueAngle(key, valueToChange);
+
+            }
+            if (key == KeyCode.DownArrow || key == KeyCode.UpArrow)
+            {
+
+                return ichangeVelocityAngle.WhenKeyPressChangeValueVelocity(key, valueToChange);
+
+            }
+
             return valueToChange;
         }
 
