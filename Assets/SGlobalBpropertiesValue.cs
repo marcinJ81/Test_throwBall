@@ -23,7 +23,7 @@ namespace Assets
         private SGlobalBpropertiesValue()
         {
             MIN_ANGLE = 1f;
-            MAX_ANGLE = 90f;
+            MAX_ANGLE = 89f;
             MIN_VELOCITY = 1f;
             MAX_VELOCITY = 100f;
         }
