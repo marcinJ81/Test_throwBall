@@ -42,7 +42,7 @@ namespace Assets
             if (Input.GetKey(KeyCode.RightArrow))
             {
                
-                if (angle <= 89)
+                if (angle < 89)
                 {
                    angle += 1;
                     return angle;
@@ -52,7 +52,7 @@ namespace Assets
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                
-                if (angle >= 1)
+                if (angle > 1)
                 {
                    angle -= 1;
                     return angle;
@@ -67,7 +67,7 @@ namespace Assets
             //decrease velocity
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                if (velocity >= 1)
+                if (velocity > 1)
                 {
                     velocity -= 1;
                     return velocity;
@@ -76,7 +76,7 @@ namespace Assets
             //increase velocity
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                if (velocity <= 100)
+                if (velocity < 100)
                 {
                     velocity += 1;
                     return velocity;
