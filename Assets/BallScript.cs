@@ -33,7 +33,8 @@ public class BallScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             //finally hir set angle and velocity and resolution
-            rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
+          
+                rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
         }
         
         //Debug.Log("distance ball -> target = " + distance.z.ToString());

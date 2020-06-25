@@ -22,6 +22,7 @@ public class Balistic_Calculation
         this.distancePartNumber = 1;
         this.savefiletodisk = new FileIO();
     }
+    
     public Balistic_Calculation(ICalculateDistanceAndTime distanceAndtime, int resolution, float velocity, float angle)
         :this()
     {
@@ -37,7 +38,36 @@ public class Balistic_Calculation
         this.velocity = velocity;
         this.maxdistanceFlyTime = distanceAndtime;
     }
-    
+    public Vector3 CalculateArcOneVector(float time, float angle, float velocity)
+    {
+        Vector3 result;
+
+        Debug.Log("distancePartNumber= " + distancePartNumber.ToString());
+        float partOfRoad = (float)distancePartNumber / resolution;
+        radianAngle = SAngleToRadian.AngleToRadian(angle);
+        maxDistance = maxdistanceFlyTime.MaxDistance(velocity, radianAngle, g);
+        result = CalculateArcPoint(time, maxDistance, partOfRoad);
+        distancePartNumber++;
+        float timeFly = maxdistanceFlyTime.CalculateTimeOfFly(velocity, radianAngle, maxDistance);
+        Debug.Log("timeFly= " + timeFly.ToString());
+        Debug.Log("time= " + time.ToString());
+
+        if (CalculateArcPoint(time, maxDistance, partOfRoad,velocity).z >= maxDistance)
+        {
+            return new Vector3(0, 1, 0);
+        }
+        return result;
+    }
+    private Vector3 CalculateArcPoint(float t, float x, float amountDistance,float velocity)
+    {
+        float s = t * x * amountDistance;
+        savefiletodisk.writeFileToDisc(s.ToString());
+        float y = s * Mathf.Tan(radianAngle) - ((g * s * s) /
+            (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
+       // savefiletodisk.writeFileToDisc(y.ToString());
+        Debug.Log("distance=" + s.ToString());
+        return new Vector3(0, y, s);
+    }
     public Vector3 CalculateArcOneVector(float time)
     {
         Vector3 result;
