@@ -20,6 +20,7 @@ public class BallScript : MonoBehaviour
         ballGameObject = GameObject.Find("Sphere");
         ballStartPosition = ballGameObject.transform.position;
         ballFly = new Balistic_Calculation(new DistanceAndTime(), 10, 45f, 45f);
+
     }
     void Start()
     {
@@ -34,7 +35,8 @@ public class BallScript : MonoBehaviour
         {
             //finally hir set angle and velocity and resolution
           
-                rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
+             //   rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime));
+            rb.MovePosition(ballFly.CalculateArcOneVector(Time.deltaTime,));
         }
         
         //Debug.Log("distance ball -> target = " + distance.z.ToString());

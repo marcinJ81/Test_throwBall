@@ -22,9 +22,8 @@ public class Balistic_Calculation
         this.distancePartNumber = 1;
         this.savefiletodisk = new FileIO();
     }
-    
-    public Balistic_Calculation(ICalculateDistanceAndTime distanceAndtime, int resolution, float velocity, float angle)
-        :this()
+    public Balistic_Calculation(ICalculateDistanceAndTime distanceAndtime, int resolution)
+        : this()
     {
         if ((resolution == 0) || (resolution < 0))
         {
@@ -34,10 +33,15 @@ public class Balistic_Calculation
         {
             this.resolution = resolution;
         }
-        this.angle = angle;
-        this.velocity = velocity;
         this.maxdistanceFlyTime = distanceAndtime;
     }
+    public Balistic_Calculation(ICalculateDistanceAndTime distanceAndtime, int resolution, float velocity, float angle)
+        :this(distanceAndtime,resolution)
+    {
+        this.angle = angle;
+        this.velocity = velocity;
+    }
+
     public Vector3 CalculateArcOneVector(float time, float angle, float velocity)
     {
         Vector3 result;
