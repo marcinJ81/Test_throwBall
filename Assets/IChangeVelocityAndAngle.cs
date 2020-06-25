@@ -42,7 +42,7 @@ namespace Assets
             if (Input.GetKey(KeyCode.RightArrow))
             {
                
-                if (angle < 89)
+                if (angle < SGlobalBpropertiesValue.MAX_ANGLE)
                 {
                    angle += 1;
                     return angle;
@@ -52,7 +52,7 @@ namespace Assets
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                
-                if (angle > 1)
+                if (angle > SGlobalBpropertiesValue.MIN_ANGLE)
                 {
                    angle -= 1;
                     return angle;
@@ -67,7 +67,7 @@ namespace Assets
             //decrease velocity
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                if (velocity > 1)
+                if (velocity > SGlobalBpropertiesValue.MIN_VELOCITY)
                 {
                     velocity -= 1;
                     return velocity;
@@ -76,7 +76,7 @@ namespace Assets
             //increase velocity
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                if (velocity < 100)
+                if (velocity < SGlobalBpropertiesValue.MAX_VELOCITY)
                 {
                     velocity += 1;
                     return velocity;

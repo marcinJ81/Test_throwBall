@@ -8,25 +8,24 @@ namespace Assets
 {
    public sealed class SGlobalBpropertiesValue
     {
-        private static SGlobalBpropertiesValue Single_Instance = null;
+        private static SGlobalBpropertiesValue Single_Instance = new SGlobalBpropertiesValue();
+
         public static SGlobalBpropertiesValue Instance
         {
             get
             {
-                if (Single_Instance == null)
-                {
-                    Single_Instance = new SGlobalBpropertiesValue();
-                }
                 return Single_Instance;
             }
         }
-        private SGlobalBpropertiesValue()
+        static  SGlobalBpropertiesValue()
         {
             MIN_ANGLE = 1f;
             MAX_ANGLE = 89f;
             MIN_VELOCITY = 1f;
             MAX_VELOCITY = 100f;
         }
+        private SGlobalBpropertiesValue() { }
+
         public static float MIN_ANGLE { get; private set; }
         public static float MAX_ANGLE { get; private set; }
         public static float MIN_VELOCITY { get; private set; }
