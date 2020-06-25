@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// https://www.youtube.com/watch?v=iLlWirdxass
+/// https://en.wikipedia.org/wiki/Projectile_motion
+/// </summary>
 [RequireComponent(typeof(LineRenderer))]
 public class ThrowBall_Line : MonoBehaviour
 {
