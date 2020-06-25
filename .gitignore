@@ -1,13 +1,9 @@
 ﻿/Library
 /Temp
-/Assembly-CSharp.csproj
-/Assembly-CSharp-Editor.csproj
-/Assembly-CSharp-Editor-firstpass.csproj
-/.idea
-/.vs
 /obj
 /UnityPackageManager
 /Logs
 /Build
+/.vs
 /*.sln
 *.cs.meta

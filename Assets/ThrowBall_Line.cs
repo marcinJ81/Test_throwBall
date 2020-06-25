@@ -12,9 +12,9 @@ public class ThrowBall_Line : MonoBehaviour
     private LineRenderer lr;
 
     public GameObject TargetCircle;
-    public float velocity = 20;
-    public float angle = 45;
-    public int resolution = 0;
+    public float velocity = 1;
+    public float angle = 1;
+    public int resolution = 20;
     private float g;
     private float radianAngle;
     private Target_script targetScript;
@@ -38,13 +38,19 @@ public class ThrowBall_Line : MonoBehaviour
     private void OnValidate()
     {
         if (lr != null && Application.isPlaying)
+        {
             RenderArc();
+        }
     }
 
     private void OnValidate(float velocity, float angle)
     {
-        if( (lr != null && Application.isPlaying))
-            RenderArc(velocity,angle);
+        if ((lr != null && Application.isPlaying))
+        {
+            this.angle = angle;
+            this.velocity = velocity;
+            RenderArc(velocity, angle);
+        }
     }
 
     private void RenderArc(float velocity, float angle)
