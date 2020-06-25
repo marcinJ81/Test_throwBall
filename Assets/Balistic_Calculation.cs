@@ -44,18 +44,13 @@ public class Balistic_Calculation
 
     public Vector3 CalculateArcOneVector(float time, float angle, float velocity)
     {
-        Vector3 result;
-
-        Debug.Log("distancePartNumber= " + distancePartNumber.ToString());
+        Vector3 result; 
         float partOfRoad = (float)distancePartNumber / resolution;
         radianAngle = SAngleToRadian.AngleToRadian(angle);
         maxDistance = maxdistanceFlyTime.MaxDistance(velocity, radianAngle, g);
-        result = CalculateArcPoint(time, maxDistance, partOfRoad);
+        result = CalculateArcPoint(time, maxDistance, partOfRoad,velocity);
         distancePartNumber++;
         float timeFly = maxdistanceFlyTime.CalculateTimeOfFly(velocity, radianAngle, maxDistance);
-        Debug.Log("timeFly= " + timeFly.ToString());
-        Debug.Log("time= " + time.ToString());
-
         if (CalculateArcPoint(time, maxDistance, partOfRoad,velocity).z >= maxDistance)
         {
             return new Vector3(0, 1, 0);

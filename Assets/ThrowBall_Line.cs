@@ -39,7 +39,7 @@ public class ThrowBall_Line : MonoBehaviour
 
     private void OnValidate(float velocity, float angle)
     {
-        if (lr != null && Application.isPlaying)
+        if( (lr != null && Application.isPlaying))
             RenderArc(velocity,angle);
     }
 

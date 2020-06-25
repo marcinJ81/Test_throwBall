@@ -9,13 +9,15 @@ public class Target_script : MonoBehaviour
     // Start is called before the first frame update
     public float angle { get; private set; }
     public float velocity { get; private set; }
-
+    public GameObject InfoTextObject;
     // private IChangeVelocityAndAngle changeAngleVelocity;
     private StrategyForChangeAngleAndVelocity strategy;
+    private TextMesh textMesh;
     private void Awake()
     {
         //changeAngleVelocity = new ChangeValueVelocityAndAngle();
         strategy = new StrategyForChangeAngleAndVelocity();
+       
     }
     void Start()
     {
@@ -37,7 +39,7 @@ public class Target_script : MonoBehaviour
         {
             this.velocity = strategy.StrategyTochange(key, this.velocity);
         }
-
+        ShowSpeedDistanceMassAboutBall(InfoTextObject.GetComponent(typeof(TextMesh)) as TextMesh);
     }
 
     void changeValue()
@@ -71,6 +73,11 @@ public class Target_script : MonoBehaviour
                 this.velocity += 1;
             Debug.Log("velocity in script = " + velocity.ToString());
         }
+    }
+    private void ShowSpeedDistanceMassAboutBall(TextMesh textmesh)
+    {
+        textmesh.text = "Angle : " + angle.ToString("n2");
+        textmesh.text += "\nVelocity : " + velocity.ToString("n2");
     }
 
 }
