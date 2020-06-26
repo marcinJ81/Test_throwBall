@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assets
 {
-   public sealed class SGlobalBpropertiesValue
+    /// <summary>
+    /// https://www.altcontroldelete.pl/artykuly/konstrukcyjny-wzorzec-projektowy-singleton-implementacja-w-c-/
+    /// </summary>
+    public sealed class SGlobalBpropertiesValue
     {
-        private static SGlobalBpropertiesValue Single_Instance = new SGlobalBpropertiesValue();
-
-        public static SGlobalBpropertiesValue Instance
-        {
-            get
-            {
-                return Single_Instance;
-            }
-        }
         static  SGlobalBpropertiesValue()
         {
             MIN_ANGLE = 1f;
